@@ -1,0 +1,19 @@
+// .vscode/settings.json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "search.exclude": {
+    "**/coverage": true,
+    "**/dist": true,
+    "**/logs": true
+  },
+  "workbench.editor.highlightModifiedTabs": true
+  /*
+  // relative import can lead to long paths '../../../
+  typescript.preferences.importModuleSpecifier": "relative"
+  */
+  //"prettier.enableDebugLogs": true
+}

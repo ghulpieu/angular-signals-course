@@ -1,7 +1,6 @@
-export type MessageSeverity = "error" | "warning" | "info" | "success";
+export type MessageSeverity = 'error' | 'warning' | 'info' | 'success';
 
-export type Message = {
+export interface Message {
   severity: MessageSeverity;
   text: string;
 }
-

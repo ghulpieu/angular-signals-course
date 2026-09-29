@@ -1,7 +1,6 @@
-import {Course} from "../models/course.model";
+import { Course } from '../models/course.model';
 
-
-export type EditCourseDialogData = {
+export interface EditCourseDialogData {
   mode: 'create' | 'update';
   title: string;
   course?: Course;

@@ -1,6 +1,5 @@
-import {Lesson} from "./lesson.model";
+import { Lesson } from './lesson.model';
 
-
-export type GetLessonsResponse = {
+export interface GetLessonsResponse {
   lessons: Lesson[];
 }

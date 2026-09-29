@@ -1,6 +1,5 @@
-import {Course} from "./course.model";
+import { Course } from './course.model';
 
-
-export type GetCoursesResponse = {
+export interface GetCoursesResponse {
   courses: Course[];
 }

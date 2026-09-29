@@ -1,4 +1,4 @@
-export type Lesson = {
+export interface Lesson {
   id: string;
   description: string;
   duration: string;
