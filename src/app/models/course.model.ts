@@ -1,6 +1,6 @@
 import { CourseCategory } from './course-category.model';
 
-export interface Course {
+export interface ICourse {
   id: string;
   title: string;
   longDescription: string;
@@ -13,6 +13,6 @@ export interface Course {
   lessonsCount: number;
 }
 
-export function sortCoursesBySeqNo(c1: Course, c2: Course) {
+export function sortCoursesBySeqNo(c1: ICourse, c2: ICourse) {
   return c1.seqNo - c2.seqNo;
 }

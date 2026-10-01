@@ -1,5 +1,5 @@
-import { Course } from './course.model';
+import { ICourse } from './course.model';
 
 export interface GetCoursesResponse {
-  courses: Course[];
+  courses: ICourse[];
 }

@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
-import { Course, sortCoursesBySeqNo } from '../models/course.model';
+import { ICourse, sortCoursesBySeqNo } from '../models/course.model';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { CoursesCardListComponent } from '../courses-card-list/courses-card-list.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,6 +19,7 @@ import {
   outputToObservable,
   outputFromObservable,
 } from '@angular/core/rxjs-interop';
+import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
 
 @Component({
   selector: 'home',
@@ -26,4 +27,23 @@ import {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  private coursesService = inject(CoursesServiceWithFetch);
+  public courses = signal<ICourse[]>([]);
+
+  public constructor() {
+    void this.loadCourses().then(() =>
+      console.log('All courses loaded:', this.courses()),
+    );
+  }
+
+  public async loadCourses() {
+    try {
+      const courses = await this.coursesService.loadAllCourses();
+      this.courses.set(courses);
+    } catch (err) {
+      alert('Error loading courses!');
+      console.error(err);
+    }
+  }
+}
