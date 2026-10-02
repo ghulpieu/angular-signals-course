@@ -28,7 +28,7 @@ import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  private coursesService = inject(CoursesServiceWithFetch);
+  private coursesService = inject(CoursesService);
   #courses = signal<ICourse[]>([]);
 
   public beginnerCourses = computed(() => {

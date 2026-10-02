@@ -1,4 +1,4 @@
-import { inject, Injectable, Service } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { firstValueFrom } from 'rxjs';
@@ -18,5 +18,31 @@ export class CoursesService {
     const response = await firstValueFrom(courses$);
 
     return response.courses;
+  }
+
+  public async createCourse(course: Partial<ICourse>): Promise<ICourse> {
+    const course$ = this.http.post<ICourse>(
+      `${this.env.apiRoot}/courses`,
+      course,
+    );
+    return firstValueFrom(course$);
+  }
+
+  public async saveCourse(
+    courseId: string,
+    changes: Partial<ICourse>,
+  ): Promise<ICourse> {
+    const course$ = this.http.put<ICourse>(
+      `${this.env.apiRoot}/courses/${courseId}`,
+      changes,
+    );
+    return firstValueFrom(course$);
+  }
+
+  public async deleteCourse(courseId: string): Promise<ICourse> {
+    const course$ = this.http.delete<ICourse>(
+      `${this.env.apiRoot}/courses/${courseId}`,
+    );
+    return firstValueFrom(course$);
   }
 }
