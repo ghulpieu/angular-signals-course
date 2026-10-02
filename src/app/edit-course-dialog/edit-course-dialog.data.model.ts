@@ -1,7 +1,7 @@
-import { Course } from '../models/course.model';
+import { ICourse } from '../models/course.model';
 
-export interface EditCourseDialogData {
+export interface IEditCourseDialogData {
   mode: 'create' | 'update';
   title: string;
-  course?: Course;
+  course?: ICourse;
 }

@@ -55,7 +55,12 @@ export default defineConfig([
       // Require explicit accessibility modifiers on class members
       '@typescript-eslint/explicit-member-accessibility': [
         'error',
-        { accessibility: 'explicit' },
+        {
+          accessibility: 'explicit',
+          overrides: {
+            constructors: 'no-public',
+          },
+        },
       ],
 
       // Enforce naming conventions

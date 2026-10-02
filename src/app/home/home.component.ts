@@ -41,7 +41,7 @@ export class HomeComponent {
     return courses.filter((course) => course.category === 'ADVANCED');
   });
 
-  public constructor() {
+  constructor() {
     effect(() => {
       console.log('Beginner:', this.beginnerCourses());
       console.log('Advanced:', this.advancedCourses());

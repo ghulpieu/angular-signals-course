@@ -1,7 +1,10 @@
 import { Component, inject, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ICourse } from '../models/course.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { IEditCourseDialogData } from '../edit-course-dialog/edit-course-dialog.data.model';
+import { EditCourseDialogComponent } from '../edit-course-dialog/edit-course-dialog.component';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'courses-card-list',
@@ -10,5 +13,30 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './courses-card-list.component.scss',
 })
 export class CoursesCardListComponent {
+  private dialog = inject(MatDialog);
   public courses = input.required<ICourse[]>();
+
+  public async onEditCourse(course: ICourse) {
+    const newCourse = await openEditCourseDialog(this.dialog, {
+      mode: 'update',
+      title: 'Update Existing Course',
+      course,
+    });
+    console.log('Course edited:', newCourse);
+  }
+}
+
+export async function openEditCourseDialog(
+  dialog: MatDialog,
+  data: IEditCourseDialogData,
+) {
+  const config = new MatDialogConfig();
+  config.disableClose = true;
+  config.autoFocus = true;
+  config.width = '400px';
+  config.data = data;
+
+  const close$ = dialog.open(EditCourseDialogComponent, config).afterClosed();
+
+  return firstValueFrom(close$);
 }
