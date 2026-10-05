@@ -15,6 +15,8 @@ import { firstValueFrom } from 'rxjs';
 export class CoursesCardListComponent {
   private dialog = inject(MatDialog);
   public courses = input.required<ICourse[]>();
+  public courseUpdated = output<ICourse>();
+  public courseDeleted = output<string>();
 
   public async onEditCourse(course: ICourse) {
     const newCourse = await openEditCourseDialog(this.dialog, {
@@ -23,6 +25,11 @@ export class CoursesCardListComponent {
       course,
     });
     console.log('Course edited:', newCourse);
+    this.courseUpdated.emit(newCourse);
+  }
+
+  public onCourseDeleted(course: ICourse) {
+    this.courseDeleted.emit(course.id);
   }
 }
 
