@@ -8,4 +8,12 @@ import { NgClass } from '@angular/common';
   styleUrls: ['./messages.component.scss'],
   imports: [NgClass],
 })
-export class MessagesComponent {}
+export class MessagesComponent {
+  private messagesService = inject(MessagesService);
+
+  public message = this.messagesService.message;
+
+  public onClose() {
+    this.messagesService.clear();
+  }
+}

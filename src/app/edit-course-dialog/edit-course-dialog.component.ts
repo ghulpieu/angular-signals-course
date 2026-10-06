@@ -12,6 +12,7 @@ import { LoadingIndicatorComponent } from '../loading/loading.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CourseCategoryComboboxComponent } from '../course-category-combobox/course-category-combobox.component';
 import { CourseCategory } from '../models/course-category.model';
+import { MessagesService } from '../messages/messages.service';
 
 @Component({
   selector: 'edit-course-dialog',
@@ -25,6 +26,7 @@ import { CourseCategory } from '../models/course-category.model';
   styleUrl: './edit-course-dialog.component.scss',
 })
 export class EditCourseDialogComponent {
+  private messagesService = inject(MessagesService);
   private dialogRef = inject(MatDialogRef);
 
   private data: IEditCourseDialogData = inject(MAT_DIALOG_DATA);
@@ -55,8 +57,8 @@ export class EditCourseDialogComponent {
       );
       this.dialogRef.close(updatedCourse);
     } catch (err) {
+      this.messagesService.showMessage(`Failed to save the course.`, 'error');
       console.error(err);
-      alert('Failed to save the course');
     }
   }
 
@@ -65,8 +67,8 @@ export class EditCourseDialogComponent {
       const newCourse = await this.courseService.createCourse(course);
       this.dialogRef.close(newCourse);
     } catch (err) {
+      this.messagesService.showMessage(`Error creating the course.`, 'error');
       console.error(err);
-      alert(`Error creating the course.`);
     }
   }
 

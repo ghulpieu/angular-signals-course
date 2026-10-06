@@ -1,4 +1,5 @@
-import { Component, effect, linkedSignal, signal } from '@angular/core';
+import { Component, effect, inject, linkedSignal, signal } from '@angular/core';
+import { MessagesService } from '../messages/messages.service';
 
 @Component({
   selector: 'linked-signal-demo',
@@ -6,6 +7,8 @@ import { Component, effect, linkedSignal, signal } from '@angular/core';
   styleUrl: './linked-signal-demo.component.scss',
 })
 export class LinkedSignalDemoComponent {
+  private messagesService = inject(MessagesService);
+
   courses = [
     {
       code: 'BEGINNERS',
@@ -34,8 +37,11 @@ export class LinkedSignalDemoComponent {
     this.quantity.set(parseInt(quantity));
   }
 
-  onArticleAdded() {
-    alert(`${this.quantity()} licenses added for ${this.selectedCourse()}`);
+  public onArticleAdded() {
+    this.messagesService.showMessage(
+      `${this.quantity()} licenses added for ${this.selectedCourse()}`,
+      'error',
+    );
   }
 
   onCourseSelected(courseCode: string) {
