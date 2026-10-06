@@ -22,8 +22,6 @@ import {
   outputToObservable,
   outputFromObservable,
 } from '@angular/core/rxjs-interop';
-//import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
-import { LoadingService } from '../loading/loading.service';
 
 @Component({
   selector: 'home',
@@ -34,7 +32,6 @@ import { LoadingService } from '../loading/loading.service';
 export class HomeComponent {
   private coursesService = inject(CoursesService);
   private dialog = inject(MatDialog);
-  private loadingService = inject(LoadingService);
 
   #courses = signal<ICourse[]>([]);
 
