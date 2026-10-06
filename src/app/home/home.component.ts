@@ -23,6 +23,7 @@ import {
   outputFromObservable,
 } from '@angular/core/rxjs-interop';
 import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
+import { LoadingService } from '../loading/loading.service';
 
 @Component({
   selector: 'home',
@@ -33,6 +34,8 @@ import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
 export class HomeComponent {
   private coursesService = inject(CoursesService);
   private dialog = inject(MatDialog);
+  private loadingService = inject(LoadingService);
+
   #courses = signal<ICourse[]>([]);
 
   public beginnerCourses = computed(() => {
@@ -58,11 +61,15 @@ export class HomeComponent {
 
   public async loadCourses() {
     try {
+      this.loadingService.loadingOn();
+
       const courses = await this.coursesService.loadAllCourses();
       this.#courses.set(courses.sort(sortCoursesBySeqNo));
     } catch (err) {
       alert(`Error loading courses!`);
       console.error(err);
+    } finally {
+      this.loadingService.loadingOff();
     }
   }
 
