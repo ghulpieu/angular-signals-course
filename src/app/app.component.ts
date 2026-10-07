@@ -7,6 +7,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { MatIconButton } from '@angular/material/button';
 import { LoadingIndicatorComponent } from './loading/loading.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -26,4 +27,12 @@ import { MessagesComponent } from './messages/messages.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  private authService = inject(AuthService);
+
+  public isLoggedIn = this.authService.isLoggedIn;
+
+  public async onLogout() {
+    await this.authService.logout();
+  }
+}

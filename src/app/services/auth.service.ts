@@ -1,11 +1,37 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { User } from '../models/user.model';
+import { computed, effect, inject, Service, signal } from '@angular/core';
+import { IUser } from '../models/user.model';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 const USER_STORAGE_KEY = 'user';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthService {}
+@Service()
+export class AuthService {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
+  #userSignal = signal<IUser | null>(null);
+
+  public user = this.#userSignal.asReadonly();
+
+  public isLoggedIn = computed(() => !!this.user());
+
+  public async login(email: string, password: string): Promise<IUser> {
+    const login$ = this.http.post<IUser>(`${environment.apiRoot}/login`, {
+      email,
+      password,
+    });
+
+    const user = await firstValueFrom(login$);
+
+    this.#userSignal.set(user);
+    return user;
+  }
+
+  public async logout() {
+    this.#userSignal.set(null);
+    await this.router.navigateByUrl('/login');
+  }
+}
