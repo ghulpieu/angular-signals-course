@@ -1,7 +1,7 @@
 import { Component, effect, inject, resource, signal } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { environment } from '../../environments/environment';
-import { Lesson } from '../models/lesson.model';
+import { ILesson } from '../models/lesson.model';
 
 @Component({
   selector: 'resource-demo',
@@ -14,7 +14,7 @@ export class ResourceDemoComponent {
 
   search = signal<string>('');
 
-  lessons = signal<Lesson[]>([]);
+  lessons = signal<ILesson[]>([]);
 
   constructor() {
     effect(() => {

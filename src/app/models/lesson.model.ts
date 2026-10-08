@@ -1,4 +1,4 @@
-export interface Lesson {
+export interface ILesson {
   id: string;
   description: string;
   duration: string;

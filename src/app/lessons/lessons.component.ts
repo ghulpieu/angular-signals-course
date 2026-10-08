@@ -6,7 +6,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { LessonsService } from '../services/lessons.service';
-import { Lesson } from '../models/lesson.model';
+import { ILesson } from '../models/lesson.model';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 
 @Component({
