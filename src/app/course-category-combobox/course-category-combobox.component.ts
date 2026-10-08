@@ -8,4 +8,12 @@ import { CourseCategory } from '../models/course-category.model';
   templateUrl: './course-category-combobox.component.html',
   styleUrl: './course-category-combobox.component.scss',
 })
-export class CourseCategoryComboboxComponent {}
+export class CourseCategoryComboboxComponent {
+  public label = input.required<string>();
+
+  public value = model.required<CourseCategory>();
+
+  public onCategoryChanged(category: string) {
+    this.value.set(category as CourseCategory);
+  }
+}
