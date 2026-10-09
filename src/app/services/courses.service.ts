@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { ICourse } from '../models/course.model';
-import { GetCoursesResponse } from '../models/get-courses.response';
+import { IGetCoursesResponse } from '../models/get-courses.response';
 
 @Service()
 export class CoursesService {
@@ -11,7 +11,7 @@ export class CoursesService {
   private env = environment;
 
   public async loadAllCourses(): Promise<ICourse[]> {
-    const courses$ = this.http.get<GetCoursesResponse>(
+    const courses$ = this.http.get<IGetCoursesResponse>(
       `${this.env.apiRoot}/courses`,
     );
 

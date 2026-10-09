@@ -1,5 +1,5 @@
 import { ILesson } from './lesson.model';
 
-export interface GetLessonsResponse {
+export interface IGetLessonsResponse {
   lessons: ILesson[];
 }

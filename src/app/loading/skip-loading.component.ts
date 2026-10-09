@@ -6,7 +6,7 @@ import { HttpContextToken } from '@angular/common/http';
  * to the request.
  *
  * Example:
- * this.http.get<GetCoursesResponse>(`${this.env.apiRoot}/courses`,
+ * this.http.get<IGetCoursesResponse>(`${this.env.apiRoot}/courses`,
  *   {
  *     context: new HttpContext().set(SKIP_LOADING, true)
  *   }

@@ -7,6 +7,7 @@ import { LinkedSignalDemoComponent } from './linked-signal/linked-signal-demo.co
 import { isUserAuthenticated } from './guards/auth.guard';
 import { CourseComponent } from './course/course.component';
 import { courseResolver } from './course/course.resolver';
+import { courseLessonsResolver } from './course/course-lessons.resolver';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
     canActivate: [isUserAuthenticated],
     resolve: {
       course: courseResolver,
+      lessons: courseLessonsResolver,
     },
   },
   {
