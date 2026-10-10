@@ -1,4 +1,12 @@
-import { Component, inject, input, output } from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  output,
+  viewChildren,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ICourse } from '../models/course.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -17,6 +25,13 @@ export class CoursesCardListComponent {
   public courses = input.required<ICourse[]>();
   public courseUpdated = output<ICourse>();
   public courseDeleted = output<string>();
+  public courseCards = viewChildren<ElementRef>('courseCard');
+
+  constructor() {
+    effect(() => {
+      console.log('courseCards:', this.courseCards());
+    });
+  }
 
   public async onEditCourse(course: ICourse) {
     const newCourse = await openEditCourseDialog(this.dialog, {
